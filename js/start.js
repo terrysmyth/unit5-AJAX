@@ -79,24 +79,22 @@ function makeModal(n) {
 		const month = person.dob.date.substring(5,7);
 		const day = person.dob.date.substring(8,10);
 
-        /* NOTE ON PHONE NUMBER: I did not change the format of the phone number 
-        to reflect the design simply because the phone numbers vary in length and
-        thus they cannot all have the same format. And the instructions do not 
-        emphasise the importance of this so hopefull thats fine.
-        
-        example:
-        76610100 (length: 8)
-        749-891-6383 (length: 10)
-        43392224 (length: 8)
-        608-554-119 (length: 9)
-        081-556-3852 (length: 10)
+        let phone = person.cell.replace(/[-&\/\\#,+()$~%.'":*?<>{}]/g, '');
+        phone = phone.replace(/\s/g, '');
+        let filteredPhone = [ "(", phone.slice(0, 3), ") ", phone.slice(3, 6), "-", phone.slice(6, phone.length) ].join("");
+
+        /* NOTE ON PHONE NUMBER: I changed the format of the phone number to be:
+        (xxx) xxx-xx...xxx
+        Due to the fact that all numbers are of varying lengths I had to go with 
+        this approach.
         */
+        
         modalAll.innerHTML = `<img class="modal-img" src="${person.picture.large}" alt="profile picture">
                         <h3 id="name" class="modal-name cap">${person.name.first} ${person.name.last}</h3>
                         <p class="modal-text">${person.email}</p>
                         <p class="modal-text cap">${person.location.city}</p>
                         <hr>
-                        <p class="modal-text">${person.cell}</p>
+                        <p class="modal-text">${filteredPhone}</p>
                         <p class="modal-text">${person.location.street.number} ${person.location.street.name}, ${person.location.state} ${person.location.postcode}</p>
                         <p class="modal-text">Birthday: ${month}/${day}/${year}</p>`;
 }
