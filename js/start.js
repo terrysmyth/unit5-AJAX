@@ -58,7 +58,6 @@ function loadError(error) {
 // GALLERY EVENT LISTENER
 function setUpEventListener() {
 	card = document.getElementsByClassName("card");
-	console.log(card)
     for (let i = 0; i < card.length; i++) {
         card[i].addEventListener("click", (e) => {
         	const parent = e.target.closest(".card")
@@ -71,24 +70,34 @@ function setUpEventListener() {
 
 // FIND PERSON AND MAKE MODAL
 function makeModal(n) {
-		userNumber = n;
 		modal.style.display = "block";
 		const person = allPersonel[n];
 		const modalAll = document.querySelector('.modal-info-container');
 		// GET DOB
-		const year = person.dob.date.substring(0,4);
+		const year = person.dob.date.substring(0,2);
 		const month = person.dob.date.substring(5,7);
 		const day = person.dob.date.substring(8,10);
 
-
-		modalAll.innerHTML = `<img class="modal-img" src="${person.picture.large}" alt="profile picture">
+        /* NOTE ON PHONE NUMBER: I did not change the format of the phone number 
+        to reflect the design simply because the phone numbers vary in length and
+        thus they cannot all have the same format. And the instructions do not 
+        emphasise the importance of this so hopefull thats fine.
+        
+        example:
+        76610100 (length: 8)
+        749-891-6383 (length: 10)
+        43392224 (length: 8)
+        608-554-119 (length: 9)
+        081-556-3852 (length: 10)
+        */
+        modalAll.innerHTML = `<img class="modal-img" src="${person.picture.large}" alt="profile picture">
                         <h3 id="name" class="modal-name cap">${person.name.first} ${person.name.last}</h3>
                         <p class="modal-text">${person.email}</p>
                         <p class="modal-text cap">${person.location.city}</p>
                         <hr>
                         <p class="modal-text">${person.cell}</p>
                         <p class="modal-text">${person.location.street.number} ${person.location.street.name}, ${person.location.state} ${person.location.postcode}</p>
-                        <p class="modal-text">Birthday: ${year}/${month}/${day}</p>`;
+                        <p class="modal-text">Birthday: ${month}/${day}/${year}</p>`;
 }
 
 
