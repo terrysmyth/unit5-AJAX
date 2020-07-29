@@ -70,6 +70,7 @@ function setUpEventListener() {
 
 // FIND PERSON AND MAKE MODAL
 function makeModal(n) {
+        userNumber = n;
 		modal.style.display = "block";
 		const person = allPersonel[n];
 		const modalAll = document.querySelector('.modal-info-container');
